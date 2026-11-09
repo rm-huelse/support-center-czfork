@@ -2855,3 +2855,5 @@ img.mfp-img { width: auto; max-width: 100%; height: auto; display: block; line-h
 .mfp-img { border-radius: 6px; }
 .rm-article-main .article-body img.rm-zoomable { cursor: zoom-in; transition: box-shadow 0.15s; }
 .rm-article-main .article-body img.rm-zoomable:hover { box-shadow: 0 6px 20px rgba(50,52,255,0.15); }
+.rm-section--updates .rm-section__view-all { display: inline-block !important; font-size: 14px; font-weight: 600; color: #3234FF; text-decoration: none; }
+.rm-category-card__icon-wrap svg { display: block; }
