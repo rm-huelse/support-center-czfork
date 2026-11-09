@@ -1,5 +1,8 @@
 {{!-- ── NOTIFICATION BAR ────────────────────────────────────── --}}
-<script type="text/plain" id="rm-dc-notification">{{dc 'support_center_notification'}}</script>
+{{!-- CREWZONE: the 'support_center_notification' DC item is shared with the Rentman brand, so it is
+     switched off here. Unresolved incidents from the status page still show. To post a custom notice,
+     replace 'off' with the message (HTML allowed). --}}
+<script type="text/plain" id="rm-dc-notification">off</script>
 <div class="rm-notification-bar" id="rm-notification-bar" style="display:none" role="alert">
   <div class="rm-notification-bar__inner">
     <span class="rm-notification-bar__icon">⚠️</span>
@@ -27,10 +30,13 @@
 
     <div class="rm-hero__bottom">
       <nav class="rm-hero__jumpto" aria-label="Quick links">
-        {{!-- All hero pills live in the 'hp_hero_jumpto' dynamic content item, per locale. --}}
-        {{dc 'hp_hero_jumpto'}}
+        {{!-- CREWZONE: hardcoded, because the 'hp_hero_jumpto' DC item is shared with the Rentman brand. --}}
+        <a href="/hc/sections/35398006281106" class="rm-hero__jumpto-link">Release notes</a>
+        <a href="/hc/sections/40522266218642" class="rm-hero__jumpto-link">Getting found</a>
+        <a href="/hc/articles/39364657690514" class="rm-hero__jumpto-link">Inviting externals</a>
       </nav>
-      {{dc 'hp_hero_onboarding'}}
+      {{!-- TODO: link the Beginner's Guide once it exists (placeholder '#'). --}}
+      <a href="#" class="rm-hero__onboarding">New to CREWZONE? <strong>Start here</strong> <span class="rm-hero__onboarding-icon" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -66,7 +72,9 @@
 {{/if}}
 
 {{!-- ── SPOTLIGHT (promos: betas, events) — JS-populated from a DC JSON field ── --}}
-<script type="text/plain" id="rm-dc-spotlight">{{dc 'hp_spotlight_cards'}}</script>
+{{!-- CREWZONE: hidden for now ('off'); the 'hp_spotlight_cards' DC item holds Rentman promos.
+     To show promos, replace 'off' with a JSON array of cards. --}}
+<script type="text/plain" id="rm-dc-spotlight">off</script>
 <section class="rm-section rm-section--spotlight" id="rm-spotlight-section" style="display:none">
   <div class="container">
     <p class="rm-section__eyebrow">{{dc 'hp_spotlight_eyebrow'}}</p>
@@ -138,14 +146,12 @@
   <div class="container">
     <div class="rm-cta-band">
       <div class="rm-cta-band__text">
-        <h2 class="rm-cta-band__title">{{dc 'hp_cta_heading'}}</h2>
-        <p class="rm-cta-band__desc">{{dc 'hp_cta_desc'}}</p>
+        <h2 class="rm-cta-band__title">Still need help?</h2>
+        <p class="rm-cta-band__desc">Can't find what you're looking for? Send us a request and we'll get back to you.</p>
       </div>
       <div class="rm-cta-band__actions">
-        {{!-- Channels in cost order: community, phone, ticket. --}}
-        {{dc 'hp_cta_community'}}
-        {{dc 'hp_cta_livechat'}}
-        {{dc 'hp_cta_submit'}}
+        {{!-- CREWZONE: requests only (no community or phone yet). TODO: replace placeholder '#' with the request form link. --}}
+        <a href="#" class="rm-cta-band__btn rm-cta-band__btn--solid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Submit a request</a>
       </div>
     </div>
   </div>
