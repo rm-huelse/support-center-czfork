@@ -2758,7 +2758,7 @@ zd-autocomplete-breadcrumbs-multibrand {
 .rm-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3234FF, #F25410); }
 /* SVG logos carry the O-glow as padding (lettering is ~35% of the height), so they are drawn
    larger than their layout box via negative margins. */
-.rm-header__logo { height: 52px; margin: -13px -6px -13px -3px; }
+.rm-header__logo { height: 44px; margin: -9px -5px -9px -3px; }
 .rm-footer__logo { height: 64px; margin: -16px 0 -2px -3px; }
 .rm-footer__tagline { max-width: 280px; }
 .rm-footer__grid { grid-template-columns: 2fr 1fr; }
