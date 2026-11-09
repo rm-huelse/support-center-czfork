@@ -2,10 +2,10 @@
 
 <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-{{#if settings.favicon}}
-<link rel="shortcut icon" type="image/x-icon" href="{{settings.favicon}}">
-<link rel="icon" type="image/x-icon" href="{{settings.favicon}}">
-{{/if}}
+{{!-- CREWZONE favicons (same files as crewzone.com/favicon/) --}}
+<link rel="icon" type="image/png" sizes="32x32" href="{{asset 'favicon-32x32.png'}}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{asset 'favicon-16x16.png'}}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{asset 'apple-touch-icon.png'}}">
 <!-- Make the translated search clear button label available for use in JS -->
 <!-- See buildClearSearchButton() in script.js -->
 <script type="text/javascript">window.searchClearButtonLabelLocalized = "{{t 'search_clear'}}";</script>
