@@ -2738,7 +2738,6 @@ zd-autocomplete-breadcrumbs-multibrand {
 .rm-hero__heading-accent { text-decoration: none; background: linear-gradient(90deg, #3234FF, #F25410) no-repeat 0 100% / 100% 4px; padding-bottom: 6px; }
 .rm-hero__search.search input[type=submit] { background: linear-gradient(45deg, #3234FF, #F25410); }
 
-.rm-section__eyebrow { background: linear-gradient(90deg, #3234FF, #F25410); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; display: inline-block; }
 .rm-section--promoted, .rm-section--cta { background: #F3F4F8; }
 .rm-promoted-grid__dot { background: linear-gradient(45deg, #3234FF, #F25410); }
 .rm-promoted-grid__link:hover .rm-promoted-grid__title { color: #3234FF; }
@@ -2757,7 +2756,10 @@ zd-autocomplete-breadcrumbs-multibrand {
 
 .rm-footer { position: relative; }
 .rm-footer::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, #3234FF, #F25410); }
-.rm-footer__logo { height: 40px; }
+/* SVG logos carry the O-glow as padding (lettering is ~35% of the height), so they are drawn
+   larger than their layout box via negative margins. */
+.rm-header__logo { height: 52px; margin: -13px -6px -13px -3px; }
+.rm-footer__logo { height: 64px; margin: -16px 0 -2px -3px; }
 .rm-footer__tagline { max-width: 280px; }
 .rm-footer__grid { grid-template-columns: 2fr 1fr; }
 @media (max-width: 599px) { .rm-footer__grid { grid-template-columns: 1fr; } }
