@@ -608,6 +608,33 @@
     zoom: { enabled: true, duration: 300 }
   });
 
+  // Click-to-zoom for article screenshots: any article image (not inside a
+  // link) that is displayed smaller than its real size opens full size.
+  window.addEventListener("DOMContentLoaded", () => {
+    if (!window.jQuery || !jQuery.magnificPopup) return;
+    var imgs = document.querySelectorAll('[data-article] .article-body img');
+    Array.prototype.forEach.call(imgs, function (img) {
+      if (img.closest('a')) return;
+      var mark = function () {
+        img.classList.toggle('rm-zoomable', img.naturalWidth > img.clientWidth + 20);
+      };
+      if (img.complete) { mark(); } else { img.addEventListener('load', mark); }
+      window.addEventListener('resize', mark);
+      img.addEventListener('click', function () {
+        if (!img.classList.contains('rm-zoomable')) return;
+        jQuery.magnificPopup.open({
+          items: { src: img.currentSrc || img.src },
+          type: 'image',
+          closeOnContentClick: true,
+          closeBtnInside: false,
+          mainClass: 'mfp-with-zoom',
+          removalDelay: 200,
+          image: { verticalFit: true }
+        });
+      });
+    });
+  });
+
   // Accordions
   $('.accordion__item-title').on('click', function () {
     var $title = $(this);
