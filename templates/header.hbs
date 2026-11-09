@@ -61,7 +61,8 @@
           </div>
         </div>
       {{/if}}
-      {{link 'new_request' class='rm-header__submit'}}
+      {{!-- CREWZONE: requests go by email until the forms are ready. --}}
+      <a href="mailto:support@crewzone.com" class="rm-header__submit">{{t 'submit_a_request'}}</a>
     </div>
 
     {{!-- Search overlay --}}
@@ -100,7 +101,7 @@
             </li>
             <li class="nav-divider"></li>
           {{/if}}
-          <li class="item">{{link 'new_request' class='submit-a-request'}}</li>
+          <li class="item"><a href="mailto:support@crewzone.com" class="submit-a-request">{{t 'submit_a_request'}}</a></li>
           {{#if signed_in}}
             <li class="nav-divider"></li>
             <li class="item"><a href="/access/logout" role="menuitem">{{dc 'hdr_sign_out'}}</a></li>
