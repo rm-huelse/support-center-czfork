@@ -13,38 +13,6 @@
       {{article.title}}
     </h1>
 
-    {{!-- License badges --}}
-    {{#if article.labels}}
-      <div class="required-licenses-container">
-        {{#each (filter article.labels on="identifier" starts_with="lic_")}}
-          {{#is identifier 'lic_nolicense'}}
-            <span class="required-license"><span class="required-license__label">{{dc 'sc_label_no_license'}}</span></span>
-          {{/is}}
-          {{#is identifier 'lic_platform'}}
-            <span class="required-license"><span class="required-license__label">Platform</span></span>
-          {{/is}}
-          {{#is identifier 'lic_organize'}}
-            <span class="required-license"><span class="required-license__label">Organize</span></span>
-          {{/is}}
-          {{#is identifier 'lic_equipmentTracking'}}
-            <span class="required-license"><span class="required-license__label">{{dc 'hp_-_equipment_tracking'}}</span><span class="required-license__tiers"><span>Add-on</span></span></span>
-          {{/is}}
-          {{#is identifier 'lic_warehouse'}}
-            <span class="required-license"><span class="required-license__label">{{dc 'hp_-_additional_warehouse'}}</span><span class="required-license__tiers"><span>Add-on</span></span></span>
-          {{/is}}
-          {{#is identifier 'lic_qouteInvoice'}}
-            <span class="required-license"><span class="required-license__label">{{dc 'hp_-_quoting_invoicing'}}</span><span class="required-license__tiers"><span>Add-on</span></span></span>
-          {{/is}}
-          {{#contains (concat 'lic_equipmentSchedule_S' 'lic_equipmentSchedule_P') identifier}}
-            <span class="required-license"><span class="required-license__label">Inventory</span><span class="required-license__tiers">{{#is identifier 'lic_equipmentSchedule_S'}}<span>Standard</span>{{/is}}{{#contains (concat 'lic_equipmentSchedule_S' 'lic_equipmentSchedule_P') identifier}}<span>Pro</span>{{/contains}}</span></span>
-          {{/contains}}
-          {{#contains (concat 'lic_crew_E' 'lic_crew_S' 'lic_crew_P') identifier}}
-            <span class="required-license"><span class="required-license__label">Crew</span><span class="required-license__tiers">{{#is identifier 'lic_crew_E'}}<span>Essential</span>{{/is}}{{#contains (concat 'lic_crew_E' 'lic_crew_S') identifier}}<span>Standard</span>{{/contains}}{{#contains (concat 'lic_crew_E' 'lic_crew_S' 'lic_crew_P') identifier}}<span>Pro</span>{{/contains}}</span></span>
-          {{/contains}}
-        {{/each}}
-      </div>
-    {{/if}}
-
     {{!-- Meta line --}}
     <div class="rm-article-header__meta">
       <div class="meta-group">
