@@ -1,7 +1,7 @@
 {
   "name": "CREWZONE Support Center",
   "author": "Zendesk",
-  "version": "5.00.36",
+  "version": "5.00.37",
   "api_version": 4,
   "default_locale": "en-us",
   "settings": [
