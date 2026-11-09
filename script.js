@@ -787,13 +787,19 @@
   // so URLs are readable. Matches the old TableOfContents lib's slug algorithm
   // for backwards compatibility with bookmarked URLs.
   // Hidden by default; revealed only when 2+ headings exist.
+  // Headings without an id (e.g. articles created via the API or an import,
+  // where the Zendesk editor never added one) get a generated id, so the TOC
+  // and scroll-spy work for them too.
   (function initArticleTOC() {
     var body = document.querySelector('[data-article] .article-body');
     if (!body) return;
 
     var headings = Array.prototype.slice
-      .call(body.querySelectorAll('h1[id], h2[id]'))
+      .call(body.querySelectorAll('h1, h2'))
       .filter(function (h) { return h.textContent.trim().length > 0; });
+    headings.forEach(function (h, n) {
+      if (!h.id) { h.id = 'rm-toc-heading-' + (n + 1); }
+    });
     if (headings.length < 2) return;
 
     var toc = document.querySelector('.rm-article-toc');
