@@ -31,12 +31,12 @@
     <div class="rm-hero__bottom">
       <nav class="rm-hero__jumpto" aria-label="Quick links">
         {{!-- CREWZONE: hardcoded, because the 'hp_hero_jumpto' DC item is shared with the Rentman brand. --}}
-        <a href="/hc/sections/35398006281106" class="rm-hero__jumpto-link">Release notes</a>
-        <a href="/hc/sections/40522266218642" class="rm-hero__jumpto-link">Getting found</a>
-        <a href="/hc/articles/39364657690514" class="rm-hero__jumpto-link">Inviting externals</a>
+        <a href="/hc/sections/35398006281106" class="rm-hero__jumpto-link">{{#is help_center.locale 'de'}}Release Notes{{else}}{{#is help_center.locale 'es'}}Notas de la versión{{else}}Release notes{{/is}}{{/is}}</a>
+        <a href="/hc/sections/40522266218642" class="rm-hero__jumpto-link">{{#is help_center.locale 'de'}}Gefunden werden{{else}}{{#is help_center.locale 'es'}}Hazte visible{{else}}Getting found{{/is}}{{/is}}</a>
+        <a href="/hc/articles/39364657690514" class="rm-hero__jumpto-link">{{#is help_center.locale 'de'}}Externe einladen{{else}}{{#is help_center.locale 'es'}}Invitar a externos{{else}}Inviting externals{{/is}}{{/is}}</a>
       </nav>
       {{!-- TODO: link the Beginner's Guide once it exists (placeholder '#'). --}}
-      <a href="#" class="rm-hero__onboarding">New to CREWZONE? <strong>Start here</strong> <span class="rm-hero__onboarding-icon" aria-hidden="true">→</span></a>
+      <a href="#" class="rm-hero__onboarding">{{#is help_center.locale 'de'}}Neu bei CREWZONE? <strong>Hier starten</strong>{{else}}{{#is help_center.locale 'es'}}¿Nuevo en CREWZONE? <strong>Empieza aquí</strong>{{else}}New to CREWZONE? <strong>Start here</strong>{{/is}}{{/is}} <span class="rm-hero__onboarding-icon" aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -143,10 +143,10 @@
 {{!-- ── LATEST UPDATES (JS-populated from a section) ──────────── --}}
 <section class="rm-section rm-section--updates" id="rm-updates-section" style="display:none">
   <div class="container">
-    <p class="rm-section__eyebrow">STAY CURRENT</p>
+    <p class="rm-section__eyebrow">{{#is help_center.locale 'de'}}AKTUELL BLEIBEN{{else}}{{#is help_center.locale 'es'}}MANTENTE AL DÍA{{else}}STAY CURRENT{{/is}}{{/is}}</p>
     <div class="rm-section__header">
-      <h2 class="rm-section__title">Latest updates</h2>
-      <a href="/hc/sections/35398006281106" class="rm-section__view-all">See all release notes →</a>
+      <h2 class="rm-section__title">{{#is help_center.locale 'de'}}Neueste Updates{{else}}{{#is help_center.locale 'es'}}Últimas novedades{{else}}Latest updates{{/is}}{{/is}}</h2>
+      <a href="/hc/sections/35398006281106" class="rm-section__view-all">{{#is help_center.locale 'de'}}Alle Release Notes ansehen →{{else}}{{#is help_center.locale 'es'}}Ver todas las notas de la versión →{{else}}See all release notes →{{/is}}{{/is}}</a>
     </div>
     <div class="rm-update-grid" id="rm-update-grid"></div>
   </div>
@@ -157,12 +157,12 @@
   <div class="container">
     <div class="rm-cta-band">
       <div class="rm-cta-band__text">
-        <h2 class="rm-cta-band__title">Still need help?</h2>
-        <p class="rm-cta-band__desc">Can't find what you're looking for? Send us a request and we'll get back to you.</p>
+        <h2 class="rm-cta-band__title">{{#is help_center.locale 'de'}}Noch Fragen?{{else}}{{#is help_center.locale 'es'}}¿Necesitas más ayuda?{{else}}Still need help?{{/is}}{{/is}}</h2>
+        <p class="rm-cta-band__desc">{{#is help_center.locale 'de'}}Du findest nicht, was du suchst? Schick uns eine Anfrage, wir melden uns bei dir.{{else}}{{#is help_center.locale 'es'}}¿No encuentras lo que buscas? Envíanos una solicitud y te responderemos.{{else}}Can't find what you're looking for? Send us a request and we'll get back to you.{{/is}}{{/is}}</p>
       </div>
       <div class="rm-cta-band__actions">
         {{!-- CREWZONE: requests only (no community or phone yet), by email until the forms are ready. --}}
-        <a href="mailto:support@crewzone.com" class="rm-cta-band__btn rm-cta-band__btn--solid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Submit a request</a>
+        <a href="mailto:support@crewzone.com" class="rm-cta-band__btn rm-cta-band__btn--solid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>{{t 'submit_a_request'}}</a>
       </div>
     </div>
   </div>
@@ -224,6 +224,13 @@
     el.innerHTML = rmIcons[rmIconById[el.getAttribute('data-rm-icon')]] || rmIcons.info;
   });
 
+  // ── UI strings for JS-rendered parts (en / de / es) ──────────
+  var rmLang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
+  var rmT = ({
+    de: { viewStatus: 'Status ansehen →', readMore: 'Weiterlesen →', release: 'RELEASE' },
+    es: { viewStatus: 'Ver estado →', readMore: 'Leer más →', release: 'VERSIÓN' }
+  })[rmLang] || { viewStatus: 'View status →', readMore: 'Read more →', release: 'RELEASE' };
+
   // ── Notification bar ──────────────────────────────────────────
   var bar  = document.getElementById('rm-notification-bar');
   var text = document.getElementById('rm-notification-text');
@@ -245,7 +252,7 @@
           bar.classList.add(sev === 'critical' ? 'rm-notification-bar--critical' : 'rm-notification-bar--major');
           text.innerHTML = '<strong>' + inc.name + '</strong>'
             + (update ? ' — ' + update.body : '')
-            + ' <a href="https://status.rentman.io" target="_blank" rel="noopener">View status →</a>';
+            + ' <a href="https://status.rentman.io" target="_blank" rel="noopener">' + rmT.viewStatus + '</a>';
           bar.style.display = '';
         })
         .catch(function() {});
@@ -277,7 +284,7 @@
         var tagKey, tagInfo, date, excerpt;
         grid.innerHTML = articles.map(function(a) {
           tagKey  = (a.label_names && a.label_names[0]) ? a.label_names[0].toLowerCase().replace(/\s+/g, '-') : '';
-          tagInfo = tagMap[tagKey] || { label: 'RELEASE', cls: 'rm-update-tag--new' };
+          tagInfo = tagMap[tagKey] || { label: rmT.release, cls: 'rm-update-tag--new' };
           date    = new Date(a.created_at).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
           excerpt = a.body ? a.body.replace(/<h[1-3][^>]*>[\s\S]*?<\/h[1-3]>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140) + '…' : '';
           return '<div class="rm-update-card">'
@@ -286,7 +293,7 @@
             + (excerpt ? '<p class="rm-update-card__excerpt">' + excerpt + '</p>' : '')
             + '<div class="rm-update-card__footer">'
             + '<span class="rm-update-card__date">' + date + '</span>'
-            + '<a href="' + a.html_url + '" class="rm-update-card__more">Read more →</a>'
+            + '<a href="' + a.html_url + '" class="rm-update-card__more">' + rmT.readMore + '</a>'
             + '</div></div>';
         }).join('');
         section.style.display = '';
