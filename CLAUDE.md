@@ -12,7 +12,7 @@ running the Rentman Zendesk Help Center (Support Center) theme.
 > (licence badges, "New to Rentman" page, article redirects, Rentman tracking, Rentman
 > doc/resources footer columns) has been removed. Brand: orange `#F25410` + blue
 > `#3234FF`, often as a 45° gradient; ink `#111827`. Status page and `rm-` class prefix
-> are deliberately shared with Rentman. Logos live in `assets/crewzone-logo*.png`.
+> are deliberately shared with Rentman. Logos live in `assets/crewzone-logo*.svg`. Contact links are `mailto:support@crewzone.com` until request forms exist. CREWZONE articles mostly use H3 headings.
 > Dynamic content is **account-wide** in Zendesk, so `{{dc '…'}}` items are shared with
 > the Rentman brand unless renamed.
 
