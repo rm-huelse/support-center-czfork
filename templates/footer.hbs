@@ -5,24 +5,24 @@
         <div class="rm-footer__logo-wrap">
           <img src="{{asset 'crewzone-logo-white.svg'}}" alt="CREWZONE" class="rm-footer__logo">
         </div>
-        <p class="rm-footer__tagline">Find your next project. Find your next crew.</p>
+        <p class="rm-footer__tagline">{{#is help_center.locale 'de'}}Finde dein nächstes Projekt. Finde deine nächste Crew.{{else}}{{#is help_center.locale 'es'}}Encuentra tu próximo proyecto. Encuentra a tu próximo equipo.{{else}}Find your next project. Find your next crew.{{/is}}{{/is}}</p>
         <p class="rm-footer__status">
           <span class="rm-footer__status-dot" id="rm-status-dot"></span>
-          <a href="https://status.rentman.io" class="rm-footer__status-link" target="_blank" rel="noopener" id="rm-status-text">System status</a>
+          <a href="https://status.rentman.io" class="rm-footer__status-link" target="_blank" rel="noopener" id="rm-status-text">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}System status{{/is}}{{/is}}</a>
         </p>
       </div>
       <div class="rm-footer__col">
         <h4 class="rm-footer__col-title">{{dc 'footer_support_heading'}}</h4>
         <ul class="rm-footer__links">
           {{!-- CREWZONE: by email until the forms are ready. --}}
-          <li><a href="mailto:support@crewzone.com">Submit a request</a></li>
-          <li><a href="https://status.rentman.io" target="_blank" rel="noopener">System status</a></li>
+          <li><a href="mailto:support@crewzone.com">{{t 'submit_a_request'}}</a></li>
+          <li><a href="https://status.rentman.io" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}System status{{/is}}{{/is}}</a></li>
           <li><a href="https://crewzone.com" target="_blank" rel="noopener">crewzone.com</a></li>
         </ul>
       </div>
     </div>
     <div class="rm-footer__bottom">
-      <p class="rm-footer__copy">© <span id="rm-footer-year"></span> CREWZONE. All rights reserved.</p>
+      <p class="rm-footer__copy">© <span id="rm-footer-year"></span> CREWZONE. {{#is help_center.locale 'de'}}Alle Rechte vorbehalten.{{else}}{{#is help_center.locale 'es'}}Todos los derechos reservados.{{else}}All rights reserved.{{/is}}{{/is}}</p>
       {{#if alternative_locales}}
         <div class="dropdown rm-footer__lang-selector">
           <a class="dropdown-toggle rm-footer__lang-toggle" aria-haspopup="true" aria-expanded="false">
@@ -40,9 +40,16 @@
         </div>
       {{/if}}
       <nav class="rm-footer__legal" aria-label="Legal links">
-        <a href="https://crewzone.com/en_GB/privacy" target="_blank" rel="noopener">Privacy</a>
-        <a href="https://crewzone.com/en_GB/terms" target="_blank" rel="noopener">Terms</a>
-        <a href="https://crewzone.com/en_GB/imprint" target="_blank" rel="noopener">Imprint</a>
+        {{!-- crewzone.com has German legal pages (de_DE); Spanish falls back to English (en_GB). --}}
+        {{#is help_center.locale 'de'}}
+        <a href="https://crewzone.com/de_DE/privacy" target="_blank" rel="noopener">Datenschutz</a>
+        <a href="https://crewzone.com/de_DE/terms" target="_blank" rel="noopener">AGB</a>
+        <a href="https://crewzone.com/de_DE/imprint" target="_blank" rel="noopener">Impressum</a>
+        {{else}}
+        <a href="https://crewzone.com/en_GB/privacy" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Datenschutz{{else}}{{#is help_center.locale 'es'}}Privacidad{{else}}Privacy{{/is}}{{/is}}</a>
+        <a href="https://crewzone.com/en_GB/terms" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}AGB{{else}}{{#is help_center.locale 'es'}}Términos{{else}}Terms{{/is}}{{/is}}</a>
+        <a href="https://crewzone.com/en_GB/imprint" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Impressum{{else}}{{#is help_center.locale 'es'}}Aviso legal{{else}}Imprint{{/is}}{{/is}}</a>
+        {{/is}}
       </nav>
     </div>
   </div>
@@ -59,7 +66,12 @@
     // wording here instead, and take the worse of the overall indicator and any
     // unresolved incident so the footer never contradicts the notification bar.
     var RANK  = { none: 0, minor: 1, major: 2, critical: 3 };
-    var LABEL = ['All systems operational', 'Degraded performance', 'Partial outage', 'Major outage'];
+    var LABELS = {
+      de: ['Alle Systeme betriebsbereit', 'Eingeschränkte Leistung', 'Teilweiser Ausfall', 'Schwerer Ausfall'],
+      es: ['Todos los sistemas operativos', 'Rendimiento reducido', 'Interrupción parcial', 'Interrupción grave']
+    };
+    var LABEL = LABELS[(document.documentElement.lang || 'en').slice(0, 2).toLowerCase()]
+      || ['All systems operational', 'Degraded performance', 'Partial outage', 'Major outage'];
     var CLASS = ['ok', 'minor', 'major', 'critical'];
     var show = function (level) {
       dot.className = 'rm-footer__status-dot rm-footer__status-dot--' + CLASS[level];
