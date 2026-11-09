@@ -787,15 +787,23 @@
   // so URLs are readable. Matches the old TableOfContents lib's slug algorithm
   // for backwards compatibility with bookmarked URLs.
   // Hidden by default; revealed only when 2+ headings exist.
-  // Headings without an id (e.g. articles created via the API or an import,
-  // where the Zendesk editor never added one) get a generated id, so the TOC
-  // and scroll-spy work for them too.
+  // CREWZONE articles mostly use H3 (some H2 + H3), so the TOC lists the two
+  // highest heading levels an article actually uses, out of H1-H3; the second
+  // level is indented. Headings without an id (articles created via the API or
+  // an import, where the Zendesk editor never added one) get a generated id, so
+  // the TOC and scroll-spy work for them too.
   (function initArticleTOC() {
     var body = document.querySelector('[data-article] .article-body');
     if (!body) return;
 
+    var levels = ['H1', 'H2', 'H3'].filter(function (tag) {
+      return body.querySelector(tag.toLowerCase());
+    }).slice(0, 2);
+    if (!levels.length) return;
+    var topLevel = levels[0];
+
     var headings = Array.prototype.slice
-      .call(body.querySelectorAll('h1, h2'))
+      .call(body.querySelectorAll(levels.join(',').toLowerCase()))
       .filter(function (h) { return h.textContent.trim().length > 0; });
     headings.forEach(function (h, n) {
       if (!h.id) { h.id = 'rm-toc-heading-' + (n + 1); }
@@ -856,7 +864,7 @@
       var slug = entry.slug;
 
       var li = document.createElement('li');
-      li.className = 'rm-article-toc__item rm-article-toc__item--' + h.tagName.toLowerCase();
+      li.className = 'rm-article-toc__item' + (h.tagName === topLevel ? '' : ' rm-article-toc__item--sub');
       li.dataset.target = h.id;
 
       var a = document.createElement('a');
