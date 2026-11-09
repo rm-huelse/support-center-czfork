@@ -94,11 +94,11 @@
     <div class="rm-category-grid">
       {{#each categories}}
         {{#if ../has_multiple_categories}}
+          {{!-- CREWZONE: categories without sections are skipped until they have content. --}}
+          {{#if sections}}
           <div class="rm-category-card">
             <div class="rm-category-card__head">
-              <div class="rm-category-card__icon-wrap">
-                <span class="material-icons rm-category-card__icon rm-category-icon-{{@index}}">folder</span>
-              </div>
+              <div class="rm-category-card__icon-wrap" data-rm-icon="{{id}}" aria-hidden="true"></div>
               <h3 class="rm-category-card__name">{{name}}</h3>
             </div>
             {{#if description}}
@@ -117,14 +117,13 @@
             {{/if}}
             <a href="{{url}}" class="rm-category-card__browse-all">{{dc 'hp_categories_browse_prefix'}} {{name}} {{dc 'hp_categories_browse_suffix'}}</a>
           </div>
+          {{/if}}
         {{else}}
           {{!-- Single category: show sections as cards instead --}}
           {{#each sections}}
           <div class="rm-category-card">
             <div class="rm-category-card__head">
-              <div class="rm-category-card__icon-wrap">
-                <span class="material-icons rm-category-card__icon rm-section-icon-{{@index}}">folder</span>
-              </div>
+              <div class="rm-category-card__icon-wrap" data-rm-icon="{{id}}" aria-hidden="true"></div>
               <h3 class="rm-category-card__name">{{name}}</h3>
             </div>
             {{#if description}}
@@ -141,6 +140,18 @@
 </section>
 {{/if}}
 
+{{!-- ── LATEST UPDATES (JS-populated from a section) ──────────── --}}
+<section class="rm-section rm-section--updates" id="rm-updates-section" style="display:none">
+  <div class="container">
+    <p class="rm-section__eyebrow">STAY CURRENT</p>
+    <div class="rm-section__header">
+      <h2 class="rm-section__title">Latest updates</h2>
+      <a href="/hc/sections/35398006281106" class="rm-section__view-all">See all release notes →</a>
+    </div>
+    <div class="rm-update-grid" id="rm-update-grid"></div>
+  </div>
+</section>
+
 {{!-- ── STILL NEED HELP ─────────────────────────────────────── --}}
 <section class="rm-section rm-section--cta">
   <div class="container">
@@ -154,18 +165,6 @@
         <a href="mailto:support@crewzone.com" class="rm-cta-band__btn rm-cta-band__btn--solid"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>Submit a request</a>
       </div>
     </div>
-  </div>
-</section>
-
-{{!-- ── LATEST UPDATES (JS-populated from a section) ──────────── --}}
-<section class="rm-section rm-section--updates" id="rm-updates-section" style="display:none">
-  <div class="container">
-    <p class="rm-section__eyebrow">STAY CURRENT</p>
-    <div class="rm-section__header">
-      <h2 class="rm-section__title">Latest updates</h2>
-      <a href="/hc/en-us" class="rm-section__view-all">See full change log →</a>
-    </div>
-    <div class="rm-update-grid" id="rm-update-grid"></div>
   </div>
 </section>
 
@@ -195,14 +194,32 @@
   var yr = document.getElementById('rm-footer-year');
   if (yr) yr.textContent = new Date().getFullYear();
 
-  // ── Category card icons (by position) ────────────────────────
-  var iconMap = ['inventory_2', 'group', 'warehouse', 'settings', 'code', 'help_outline'];
-  ['.rm-category-icon-', '.rm-section-icon-'].forEach(function(prefix) {
-    iconMap.forEach(function(icon, i) {
-      document.querySelectorAll('.' + prefix.replace('.', '') + i).forEach(function(el) {
-        el.textContent = icon;
-      });
-    });
+  // ── Category card icons ──────────────────────────────────────
+  // Line icons from the CREWZONE web app (app.crewzone.com), keyed by
+  // category/section id. Unknown ids get the generic info icon.
+  var rmSvg = function (inner) {
+    return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor">' + inner + '</svg>';
+  };
+  var rmIcons = {
+    bell: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>'),
+    projects: rmSvg('<path d="M6.429,9.75,2.25,12l4.179,2.25m0-4.5,5.571,3,5.571-3m-11.142,0L2.25,7.5,12,2.25,21.75,7.5,17.571,9.75m0,0L21.75,12l-4.179,2.25m0,0L21.75,16.5,12,21.75,2.25,16.5l4.179-2.25m11.142,0L12,17.25l-5.571-3" transform="translate(-1.5 -1.5)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>'),
+    internalUsers: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7l8-4 8 4"/><g transform="translate(2, 6) scale(0.8)"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></g>'),
+    users: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>'),
+    search: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>'),
+    message: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>'),
+    calendar: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>'),
+    clock: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>'),
+    info: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>')
+  };
+  var rmIconById = {
+    '35397719596690': 'bell',          // Announcements
+    '35397807575314': 'projects',      // Project Management
+    '35397821561490': 'internalUsers', // Crew Management
+    '35397871624594': 'search',        // Marketplace
+    '35397828196242': 'message'        // Communication
+  };
+  Array.prototype.forEach.call(document.querySelectorAll('[data-rm-icon]'), function (el) {
+    el.innerHTML = rmIcons[rmIconById[el.getAttribute('data-rm-icon')]] || rmIcons.info;
   });
 
   // ── Notification bar ──────────────────────────────────────────
@@ -236,11 +253,11 @@
   // ── Latest Updates ────────────────────────────────────────────
   var section   = document.getElementById('rm-updates-section');
   var grid      = document.getElementById('rm-update-grid');
-  var sectionId = '';
+  var sectionId = '35398006281106'; // Release Notes
   sectionId = sectionId.trim();
 
   if (section && grid && sectionId && sectionId !== 'off' && !isNaN(Number(sectionId))) {
-    var locale = document.documentElement.lang || 'en-us';
+    var locale = (document.documentElement.lang || 'en-us').toLowerCase();
     var apiUrl = '/api/v2/help_center/' + locale + '/sections/' + sectionId
       + '/articles.json?per_page=4&sort_by=created_at&sort_order=desc';
 
@@ -258,9 +275,9 @@
         var tagKey, tagInfo, date, excerpt;
         grid.innerHTML = articles.map(function(a) {
           tagKey  = (a.label_names && a.label_names[0]) ? a.label_names[0].toLowerCase().replace(/\s+/g, '-') : '';
-          tagInfo = tagMap[tagKey] || { label: 'NEW FEATURE', cls: 'rm-update-tag--new' };
-          date    = new Date(a.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-          excerpt = a.body ? a.body.replace(/<[^>]+>/g, '').trim().slice(0, 140) + '…' : '';
+          tagInfo = tagMap[tagKey] || { label: 'RELEASE', cls: 'rm-update-tag--new' };
+          date    = new Date(a.created_at).toLocaleDateString(locale, { month: 'short', day: 'numeric', year: 'numeric' });
+          excerpt = a.body ? a.body.replace(/<h[1-3][^>]*>[\s\S]*?<\/h[1-3]>/gi, ' ').replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 140) + '…' : '';
           return '<div class="rm-update-card">'
             + '<span class="rm-update-tag ' + tagInfo.cls + '">' + tagInfo.label + '</span>'
             + '<h3 class="rm-update-card__title">' + a.title + '</h3>'
