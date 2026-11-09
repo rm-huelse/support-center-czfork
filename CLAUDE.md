@@ -7,6 +7,15 @@ Guidance for AI agents working in **this fork**. Read this before `AGENTS.md`.
 A Rentman fork of [zendesk/copenhagen_theme](https://github.com/zendesk/copenhagen_theme),
 running the Rentman Zendesk Help Center (Support Center) theme.
 
+> **This repo (`support-center-czfork`) is the CREWZONE Support Center** — a fork of the
+> Rentman theme, rebranded for CREWZONE (its own Zendesk brand). Rentman-only content
+> (licence badges, "New to Rentman" page, article redirects, Rentman tracking, Rentman
+> doc/resources footer columns) has been removed. Brand: orange `#F25410` + blue
+> `#3234FF`, often as a 45° gradient; ink `#111827`. Status page and `rm-` class prefix
+> are deliberately shared with Rentman. Logos live in `assets/crewzone-logo*.png`.
+> Dynamic content is **account-wide** in Zendesk, so `{{dc '…'}}` items are shared with
+> the Rentman brand unless renamed.
+
 ### Branches
 
 | Branch | What it is |
