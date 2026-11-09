@@ -12,7 +12,7 @@ running the Rentman Zendesk Help Center (Support Center) theme.
 > (licence badges, "New to Rentman" page, article redirects, Rentman tracking, Rentman
 > doc/resources footer columns) has been removed. Brand: orange `#F25410` + blue
 > `#3234FF`, often as a 45° gradient; ink `#111827`. Status page and `rm-` class prefix
-> are deliberately shared with Rentman. Logos live in `assets/crewzone-logo*.svg`. Contact links are `mailto:support@crewzone.com` until request forms exist. CREWZONE articles mostly use H3 headings. Fonts (Inter, Archivo Expanded, Material Icons) are self-hosted in `assets/` for GDPR; don't add Google Fonts links.
+> are deliberately shared with Rentman. Logos live in `assets/crewzone-logo*.svg`. Contact links are `mailto:support@crewzone.com` until request forms exist. CREWZONE articles mostly use H3 headings. Fonts (Inter, Archivo Expanded, Material Icons) are self-hosted in `assets/` for GDPR; don't add Google Fonts links. jQuery and Magnific Popup are self-hosted too (`assets/jquery.min.js`, `assets/magnific-popup.min.js`); no third-party CDNs or tracking (GTM, HubSpot, Swifteq … were removed). The only external call left is status.rentman.io.
 > Dynamic content is **account-wide** in Zendesk, so `{{dc '…'}}` items are shared with
 > the Rentman brand unless renamed.
 
