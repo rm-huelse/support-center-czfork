@@ -18,9 +18,9 @@
   
 {{!-- Fonts are self-hosted from assets/ (see style.css) so no visitor data goes to Google. --}}
   
-<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-<script src="//cdn.jsdelivr.net/jquery.magnific-popup/1.0.0/jquery.magnific-popup.min.js"></script>
-<script src="//cdn.jsdelivr.net/highlight.js/9.10.0/highlight.min.js"></script>
+{{!-- Self-hosted (GDPR: no third-party CDN requests). highlight.js was dropped: nothing used it. jquery.min.js = jQuery 3.7.1, magnific-popup.min.js = Magnific Popup 1.0.0. --}}
+<script src="{{asset 'jquery.min.js'}}"></script>
+<script src="{{asset 'magnific-popup.min.js'}}"></script>
   
 <script type="importmap">
 {
