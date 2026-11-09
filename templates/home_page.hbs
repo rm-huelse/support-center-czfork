@@ -209,14 +209,16 @@
     message: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>'),
     calendar: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>'),
     clock: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>'),
+    home: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>'),
+    user: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/>'),
     info: rmSvg('<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"/>')
   };
   var rmIconById = {
-    '35397719596690': 'bell',          // Announcements
-    '35397807575314': 'projects',      // Project Management
-    '35397821561490': 'internalUsers', // Crew Management
-    '35397871624594': 'search',        // Marketplace
-    '35397828196242': 'message'        // Communication
+    '35397828196242': 'home',          // Getting started
+    '35397807575314': 'projects',      // For planners
+    '35397821561490': 'internalUsers', // For employees
+    '35397871624594': 'user',          // For freelancers
+    '35397719596690': 'bell'           // Announcements
   };
   Array.prototype.forEach.call(document.querySelectorAll('[data-rm-icon]'), function (el) {
     el.innerHTML = rmIcons[rmIconById[el.getAttribute('data-rm-icon')]] || rmIcons.info;
