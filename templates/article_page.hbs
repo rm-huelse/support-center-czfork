@@ -41,7 +41,7 @@
           {{!-- Attachments --}}
           {{#if attachments}}
             <div class="rm-article-attachments">
-              <p class="rm-article-attachments__label">Attachments</p>
+              <p class="rm-article-attachments__label">{{#is help_center.locale 'de'}}Anhänge{{else}}{{#is help_center.locale 'es'}}Archivos adjuntos{{else}}{{#is help_center.locale 'fr'}}Pièces jointes{{else}}Attachments{{/is}}{{/is}}{{/is}}</p>
               <ul class="attachments">
                 {{#each attachments}}
                   <li class="attachment-item">

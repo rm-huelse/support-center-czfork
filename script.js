@@ -702,7 +702,7 @@
     var dt = el.getAttribute('datetime');
     if (dt) {
       var d = new Date(dt);
-      el.textContent = d.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      el.textContent = d.toLocaleDateString(document.documentElement.lang || 'en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     } else {
       // Fallback: strip everything after the date via text
       el.textContent = el.textContent.replace(/\s+at\s+\d+:\d+.*$/i, '').trim();

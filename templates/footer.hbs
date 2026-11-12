@@ -5,10 +5,10 @@
         <div class="rm-footer__logo-wrap">
           <img src="{{asset 'crewzone-logo-white.svg'}}" alt="CREWZONE" class="rm-footer__logo">
         </div>
-        <p class="rm-footer__tagline">{{#is help_center.locale 'de'}}Finde dein nächstes Projekt. Finde deine nächste Crew.{{else}}{{#is help_center.locale 'es'}}Encuentra tu próximo proyecto. Encuentra a tu próximo equipo.{{else}}Find your next project. Find your next crew.{{/is}}{{/is}}</p>
+        <p class="rm-footer__tagline">{{#is help_center.locale 'de'}}Finde dein nächstes Projekt. Finde deine nächste Crew.{{else}}{{#is help_center.locale 'es'}}Encuentra tu próximo proyecto. Encuentra a tu próximo equipo.{{else}}{{#is help_center.locale 'fr'}}Trouvez votre prochain projet. Trouvez votre prochaine équipe.{{else}}Find your next project. Find your next crew.{{/is}}{{/is}}{{/is}}</p>
         <p class="rm-footer__status">
           <span class="rm-footer__status-dot" id="rm-status-dot"></span>
-          <a href="https://status.rentman.io" class="rm-footer__status-link" target="_blank" rel="noopener" id="rm-status-text">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}System status{{/is}}{{/is}}</a>
+          <a href="https://status.rentman.io" class="rm-footer__status-link" target="_blank" rel="noopener" id="rm-status-text">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}{{#is help_center.locale 'fr'}}État du système{{else}}System status{{/is}}{{/is}}{{/is}}</a>
         </p>
       </div>
       <div class="rm-footer__col">
@@ -16,13 +16,13 @@
         <ul class="rm-footer__links">
           {{!-- CREWZONE: by email until the forms are ready. --}}
           <li><a href="mailto:support@crewzone.com">{{t 'submit_a_request'}}</a></li>
-          <li><a href="https://status.rentman.io" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}System status{{/is}}{{/is}}</a></li>
+          <li><a href="https://status.rentman.io" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Systemstatus{{else}}{{#is help_center.locale 'es'}}Estado del sistema{{else}}{{#is help_center.locale 'fr'}}État du système{{else}}System status{{/is}}{{/is}}{{/is}}</a></li>
           <li><a href="https://crewzone.com" target="_blank" rel="noopener">crewzone.com</a></li>
         </ul>
       </div>
     </div>
     <div class="rm-footer__bottom">
-      <p class="rm-footer__copy">© <span id="rm-footer-year"></span> CREWZONE. {{#is help_center.locale 'de'}}Alle Rechte vorbehalten.{{else}}{{#is help_center.locale 'es'}}Todos los derechos reservados.{{else}}All rights reserved.{{/is}}{{/is}}</p>
+      <p class="rm-footer__copy">© <span id="rm-footer-year"></span> CREWZONE. {{#is help_center.locale 'de'}}Alle Rechte vorbehalten.{{else}}{{#is help_center.locale 'es'}}Todos los derechos reservados.{{else}}{{#is help_center.locale 'fr'}}Tous droits réservés.{{else}}All rights reserved.{{/is}}{{/is}}{{/is}}</p>
       {{#if alternative_locales}}
         <div class="dropdown rm-footer__lang-selector">
           <a class="dropdown-toggle rm-footer__lang-toggle" aria-haspopup="true" aria-expanded="false">
@@ -40,16 +40,20 @@
         </div>
       {{/if}}
       <nav class="rm-footer__legal" aria-label="Legal links">
-        {{!-- crewzone.com has German legal pages (de_DE); Spanish falls back to English (en_GB). --}}
+        {{!-- crewzone.com has German (de_DE) and French (fr_FR) legal pages; Spanish falls back to English (en_GB). --}}
         {{#is help_center.locale 'de'}}
         <a href="https://crewzone.com/de_DE/privacy" target="_blank" rel="noopener">Datenschutz</a>
         <a href="https://crewzone.com/de_DE/terms" target="_blank" rel="noopener">AGB</a>
         <a href="https://crewzone.com/de_DE/imprint" target="_blank" rel="noopener">Impressum</a>
+        {{else}}{{#is help_center.locale 'fr'}}
+        <a href="https://crewzone.com/fr_FR/privacy" target="_blank" rel="noopener">Confidentialité</a>
+        <a href="https://crewzone.com/fr_FR/terms" target="_blank" rel="noopener">Conditions d'utilisation</a>
+        <a href="https://crewzone.com/fr_FR/imprint" target="_blank" rel="noopener">Mentions légales</a>
         {{else}}
-        <a href="https://crewzone.com/en_GB/privacy" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Datenschutz{{else}}{{#is help_center.locale 'es'}}Privacidad{{else}}Privacy{{/is}}{{/is}}</a>
-        <a href="https://crewzone.com/en_GB/terms" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}AGB{{else}}{{#is help_center.locale 'es'}}Términos{{else}}Terms{{/is}}{{/is}}</a>
-        <a href="https://crewzone.com/en_GB/imprint" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Impressum{{else}}{{#is help_center.locale 'es'}}Aviso legal{{else}}Imprint{{/is}}{{/is}}</a>
-        {{/is}}
+        <a href="https://crewzone.com/en_GB/privacy" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Datenschutz{{else}}{{#is help_center.locale 'es'}}Privacidad{{else}}{{#is help_center.locale 'fr'}}Confidentialité{{else}}Privacy{{/is}}{{/is}}{{/is}}</a>
+        <a href="https://crewzone.com/en_GB/terms" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}AGB{{else}}{{#is help_center.locale 'es'}}Términos{{else}}{{#is help_center.locale 'fr'}}Conditions d'utilisation{{else}}Terms{{/is}}{{/is}}{{/is}}</a>
+        <a href="https://crewzone.com/en_GB/imprint" target="_blank" rel="noopener">{{#is help_center.locale 'de'}}Impressum{{else}}{{#is help_center.locale 'es'}}Aviso legal{{else}}{{#is help_center.locale 'fr'}}Mentions légales{{else}}Imprint{{/is}}{{/is}}{{/is}}</a>
+        {{/is}}{{/is}}
       </nav>
     </div>
   </div>

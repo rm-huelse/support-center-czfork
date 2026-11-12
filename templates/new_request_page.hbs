@@ -87,7 +87,7 @@
       bar.classList.add(sev === 'critical' ? 'rm-notification-bar--critical' : 'rm-notification-bar--major');
       text.innerHTML = '<strong>' + inc.name + '</strong>'
         + (update ? ' — ' + update.body : '')
-        + ' <a href="https://status.rentman.io" target="_blank" rel="noopener">' + (({ de: 'Status ansehen →', es: 'Ver estado →' })[(document.documentElement.lang || 'en').slice(0, 2).toLowerCase()] || 'View status →') + '</a>';
+        + ' <a href="https://status.rentman.io" target="_blank" rel="noopener">' + (({ de: 'Status ansehen →', es: 'Ver estado →', fr: "Voir l'état →" })[(document.documentElement.lang || 'en').slice(0, 2).toLowerCase()] || 'View status →') + '</a>';
       bar.style.display = '';
     })
     .catch(function () {});

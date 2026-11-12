@@ -8,13 +8,13 @@
         <img src="{{asset 'crewzone-logo.svg'}}" alt="CREWZONE" class="rm-header__logo" />
       {{/link}}
       <span class="rm-header__divider" aria-hidden="true"></span>
-      <span class="rm-header__label">{{#is help_center.locale 'de'}}Support Center{{else}}{{#is help_center.locale 'es'}}Centro de soporte{{else}}Support Center{{/is}}{{/is}}</span>
+      <span class="rm-header__label">{{#is help_center.locale 'de'}}Help Center{{else}}{{#is help_center.locale 'es'}}Centro de ayuda{{else}}{{#is help_center.locale 'fr'}}Centre d'aide{{else}}Support Center{{/is}}{{/is}}{{/is}}</span>
     </div>
 
     {{!-- Right side: language + sign in + submit --}}
     <div class="rm-header__actions">
       {{!-- Search icon button --}}
-      <button class="rm-header__search-btn" id="rm-header-search-btn" aria-label="Search" aria-expanded="false" aria-controls="rm-header-search-overlay">
+      <button class="rm-header__search-btn" id="rm-header-search-btn" aria-label="{{t 'search'}}" aria-expanded="false" aria-controls="rm-header-search-overlay">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" aria-hidden="true">
           <circle cx="6.5" cy="6.5" r="4.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
           <path stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M11 11l3 3"/>
