@@ -8,7 +8,7 @@
         <img src="{{asset 'crewzone-logo.svg'}}" alt="CREWZONE" class="rm-header__logo" />
       {{/link}}
       <span class="rm-header__divider" aria-hidden="true"></span>
-      <span class="rm-header__label">{{#is help_center.locale 'de'}}Support Center{{else}}{{#is help_center.locale 'es'}}Centro de soporte{{else}}Support Center{{/is}}{{/is}}</span>
+      <span class="rm-header__label">{{#is help_center.locale 'de'}}Help Center{{else}}{{#is help_center.locale 'es'}}Centro de ayuda{{else}}{{#is help_center.locale 'fr'}}Centre d'aide{{else}}Support Center{{/is}}{{/is}}{{/is}}</span>
     </div>
 
     {{!-- Right side: language + sign in + submit --}}
