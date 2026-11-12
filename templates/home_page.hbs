@@ -224,12 +224,13 @@
     el.innerHTML = rmIcons[rmIconById[el.getAttribute('data-rm-icon')]] || rmIcons.info;
   });
 
-  // ── UI strings for JS-rendered parts (en / de / es) ──────────
+  // ── UI strings for JS-rendered parts (en / de / es / fr) ─────
   var rmLang = (document.documentElement.lang || 'en').slice(0, 2).toLowerCase();
   var rmT = ({
-    de: { viewStatus: 'Status ansehen →', readMore: 'Weiterlesen →', release: 'RELEASE' },
-    es: { viewStatus: 'Ver estado →', readMore: 'Leer más →', release: 'VERSIÓN' }
-  })[rmLang] || { viewStatus: 'View status →', readMore: 'Read more →', release: 'RELEASE' };
+    de: { viewStatus: 'Status ansehen →', readMore: 'Weiterlesen →', release: 'RELEASE', newFeature: 'NEUE FUNKTION', improvement: 'VERBESSERUNG', fix: 'FEHLERBEHEBUNG' },
+    es: { viewStatus: 'Ver estado →', readMore: 'Leer más →', release: 'VERSIÓN', newFeature: 'NUEVA FUNCIÓN', improvement: 'MEJORA', fix: 'CORRECCIÓN' },
+    fr: { viewStatus: "Voir l'état →", readMore: 'Lire la suite →', release: 'VERSION', newFeature: 'NOUVELLE FONCTIONNALITÉ', improvement: 'AMÉLIORATION', fix: 'CORRECTION' }
+  })[rmLang] || { viewStatus: 'View status →', readMore: 'Read more →', release: 'RELEASE', newFeature: 'NEW FEATURE', improvement: 'IMPROVEMENT', fix: 'FIX' };
 
   // ── Notification bar ──────────────────────────────────────────
   var bar  = document.getElementById('rm-notification-bar');
@@ -271,9 +272,9 @@
       + '/articles.json?per_page=4&sort_by=created_at&sort_order=desc';
 
     var tagMap = {
-      'new-feature':  { label: 'NEW FEATURE',  cls: 'rm-update-tag--new' },
-      'improvement':  { label: 'IMPROVEMENT',  cls: 'rm-update-tag--improvement' },
-      'fix':          { label: 'FIX',           cls: 'rm-update-tag--fix' },
+      'new-feature':  { label: rmT.newFeature,  cls: 'rm-update-tag--new' },
+      'improvement':  { label: rmT.improvement, cls: 'rm-update-tag--improvement' },
+      'fix':          { label: rmT.fix,         cls: 'rm-update-tag--fix' },
     };
 
     fetch(apiUrl)
